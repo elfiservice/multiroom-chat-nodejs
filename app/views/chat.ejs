@@ -71,31 +71,8 @@
 		<div class="container">
             <div class="row conversa" id="conversa">
 				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Fala José, blz cara?</p>
-					</div>
+				<div class="col-md-10" id="dialogos">
 
-					<div class="dialogo">
-						<h4>José</h4>
-						<p>Opa, tudo certo!</p>
-					</div>
-
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Vai estudar mais sobre NodeJS hoje?</p>
-					</div>
-
-					<div class="dialogo">
-						<h4>José</h4>
-						<p>Sim, com certeza. Vamos trabalhar com Websockets hoje, o assunto é bem interessante</p>
-					</div>
-
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Show de bola, comunicação bi-direcional em páginas ou sistemas web é muito bacana mesmo</p>
-					</div>
 				</div>
 				<div class="col-md-1"></div>
 
@@ -148,6 +125,18 @@
 			//pega uma instancia do objeto io no mesmo endereço e porta do lado servidor onde o app esta rodando
 			//esta instancia esta no file socket.io.js acima
 			var socket = io('http://localhost:8080');
+
+			//cria uma escuta da funcao emit() dentro do controller chat.js
+			socket.on('msgParaCliente', function(data){
+				var html = '';
+
+				html += '<div class="dialogo">';
+					html += '<h4>' + data.apelido + '</h4>';
+					html += '<p>' + data.mensagem + '</p>';
+				html += '</div>';
+
+				$('#dialogos').append(html);
+			});
 		</script>
 	</body>
 </html>

@@ -9,6 +9,9 @@ var serverPort = app.listen(8080, function() {
 //inicia o websocket na mesma porta do protocolo http
 var io = require('socket.io').listen(serverPort);
 
+//Criando uma variavel global dentro da Aplicação para ser acessada do controller chat.js
+app.set('io', io);
+
 //criar uma conexao do websocket
 //informando q estamos escutando Eventos de conexao
 //é executado quando uma tentativa d conexao é executado do lado do cliente (instancia do obj io)
