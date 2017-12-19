@@ -51,7 +51,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Multiroom Chat</a>
+					<a class="navbar-brand" href="#">Multiroom Chat - <i><small>Entrou como <%= dadosForm.apelido %></small></i></a> 
 				</div>
 
 
@@ -104,16 +104,15 @@
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				<div class="panel-body campo-mensagem">
-					<form>
 						<div class="col-md-12">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Mensagem">
+								<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
+								<input type="hidden" value="<%= dadosForm.apelido %>" id="apelido">
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">></button>
+									<button class="btn btn-default" type="button" id="enviar-mensagem"> > </button>
 								</span>
 							</div>
 						</div>
-					</form>
 				</div>
 			</div>
 		</nav>
@@ -137,6 +136,11 @@
 
 				$('#dialogos').append(html);
 			});
+
+			$('#enviar-mensagem').click(function() {
+				socket.emit('enviarMsgServidor', {apelido: $('#apelido').val(), mensagem: $('#mensagem').val()})
+			});
+
 		</script>
 	</body>
 </html>

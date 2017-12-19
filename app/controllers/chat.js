@@ -19,5 +19,6 @@ module.exports.startChat = function(application, req, res) {
         {apelido: dadosForm.apelido, mensagem: ' acabou de se conectar.'}
     );
 
-    res.render('chat.ejs');
+    //envia os dados do usuario conectado para a view chat para obter o nome do mesmo
+    res.render('chat.ejs', {dadosForm: dadosForm});
 }

@@ -23,4 +23,13 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('user Desconectou do Chat');
   });
+
+  //escuta o emit da view Chat com uma nova mensagem para retornar a mensagwm para todos os usuarios
+  socket.on('enviarMsgServidor', function(data) {
+    //envia a mensagem para o proprio usuario q envio a mensagem
+    socket.emit('msgParaCliente', {apelido: data.apelido, mensagem: data.mensagem});
+    //o broadcast envia a mensagem para todos conectados no mesmo Socket ( todos os usurairos receberam a msg)
+    socket.broadcast.emit('msgParaCliente', {apelido: data.apelido, mensagem: data.mensagem});
+  });
+
 });
