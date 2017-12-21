@@ -30,6 +30,13 @@ io.on('connection', function(socket){
     socket.emit('msgParaCliente', {apelido: data.apelido, mensagem: data.mensagem});
     //o broadcast envia a mensagem para todos conectados no mesmo Socket ( todos os usurairos receberam a msg)
     socket.broadcast.emit('msgParaCliente', {apelido: data.apelido, mensagem: data.mensagem});
+
+    //confere se o usuario já foi atualizado e posto na lista de usuarios dentro do chat
+    if(parseInt(data.usuario_atualizado) == 0) {
+      socket.emit('participantesParaCliente', {apelido: data.apelido});
+      socket.broadcast.emit('participantesParaCliente', {apelido: data.apelido});
+    }
+
   });
 
 });
